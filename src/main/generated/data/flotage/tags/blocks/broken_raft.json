@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "flotage:broken_oak_raft",
+    "flotage:broken_spruce_raft",
+    "flotage:broken_birch_raft",
+    "flotage:broken_jungle_raft",
+    "flotage:broken_acacia_raft",
+    "flotage:broken_dark_oak_raft",
+    "flotage:broken_crimson_raft",
+    "flotage:broken_warped_raft"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "flotage",
+  "version": "${version}",
+  "name": "Flotage",
+  "description": "Survive on the sea!",
+  "authors": [
+    "NovaCommittee",
+    "Chemiofitor"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/flotage",
+    "sources": "https://github.com/Nova-Committee/Flotage",
+    "issues": "https://github.com/Nova-Committee/Flotage/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/flotage/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "committee.nova.flotage.Flotage"
+    ],
+    "fabric-datagen": [
+      "committee.nova.flotage.FlotageDataGen"
+    ],
+    "client": [
+      "committee.nova.flotage.FlotageClient"
+    ],
+    "rei_client": [
+      "committee.nova.flotage.compat.rei.FlotageREIPlugin"
+    ],
+    "jade": [
+      "committee.nova.flotage.compat.jade.FlotageJadePlugin"
+    ],
+    "emi": [
+      "committee.nova.flotage.compat.emi.FlotageEMIPlugin"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.14",
+    "fabric": "*",
+    "minecraft": "1.18.2"
+  }
+}

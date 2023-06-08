@@ -1,0 +1,8 @@
+{
+	"parent": "flotage:base/crossed_fence",
+	"textures": {
+		"side": "block/crimson_stem",
+		"top": "block/crimson_stem_top",
+		"particle": "block/crimson_stem"
+	}
+}

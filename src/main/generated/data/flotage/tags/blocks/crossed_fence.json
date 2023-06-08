@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "flotage:oak_crossed_fence",
+    "flotage:spruce_crossed_fence",
+    "flotage:birch_crossed_fence",
+    "flotage:jungle_crossed_fence",
+    "flotage:acacia_crossed_fence",
+    "flotage:dark_oak_crossed_fence",
+    "flotage:crimson_crossed_fence",
+    "flotage:warped_crossed_fence"
+  ]
+}
