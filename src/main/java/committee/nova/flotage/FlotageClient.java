@@ -13,5 +13,7 @@ public class FlotageClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockEntityRendererRegistry.register(TileRegistry.RACK_BLOCK_ENTITY, RackRenderer::new);
+
+        Flotage. LOGGER.info("Flotage Client setup done!");
     }
 }

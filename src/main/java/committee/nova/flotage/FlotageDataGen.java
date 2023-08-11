@@ -7,12 +7,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 public class FlotageDataGen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
-        generator.addProvider(RModelProvider::new);
-        generator.addProvider(RBlockLootProvider::new);
-        generator.addProvider(LangENUSProvider::new);
-        generator.addProvider(LangZHCNProvider::new);
-        generator.addProvider(RBlockTagProvider::new);
+        generator.createPack().addProvider(FloModelProvider::new);
+        generator.createPack().addProvider(FloBlockLootProvider::new);
+        generator.createPack().addProvider(FloLangProvider.English::new);
+        generator.createPack().addProvider(FloLangProvider.Chinese::new);
+        generator.createPack().addProvider(FloBlockTagProvider::new);
 
-        Flotage.LOGGER.info("Fabricatech dataGen done!");
+        Flotage.LOGGER.info("Flotage dataGen done!");
     }
 }

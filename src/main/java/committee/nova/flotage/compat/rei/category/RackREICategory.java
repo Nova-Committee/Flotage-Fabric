@@ -3,7 +3,7 @@ package committee.nova.flotage.compat.rei.category;
 import committee.nova.flotage.Flotage;
 import committee.nova.flotage.compat.rei.FlotageREIPlugin;
 import committee.nova.flotage.compat.rei.display.RackREIDisplay;
-import committee.nova.flotage.init.BlockMember;
+import committee.nova.flotage.util.BlockMember;
 import committee.nova.flotage.init.BlockRegistry;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -17,7 +17,6 @@ import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -36,7 +35,7 @@ public class RackREICategory implements DisplayCategory<RackREIDisplay> {
 
     @Override
     public Text getTitle() {
-        return new TranslatableText("block.flotage.rack");
+        return Text.translatable("block.flotage.rack");
     }
 
     @Override
@@ -60,8 +59,8 @@ public class RackREICategory implements DisplayCategory<RackREIDisplay> {
         Arrow arrow = Widgets.createArrow(new Point(bgBounds.x + 39, bgBounds.y + 18)).animationDurationTicks(20);
         widgets.add(arrow);
 
-        Text text = new TranslatableText("tip.flotage.rack.mode").append(new TranslatableText("tip.flotage.rack.mode." + display.getMode().toString()));
-        widgets.add(Widgets.withTooltip(arrow, new TranslatableText("tip.flotage.rack.processtime", display.getProcesstime() / 20), text));
+        Text text = Text.translatable("tip.flotage.rack.mode").append(Text.translatable("tip.flotage.rack.mode." + display.getMode().toString()));
+        widgets.add(Widgets.withTooltip(arrow, Text.translatable("tip.flotage.rack.processtime", display.getProcesstime() / 20), text));
 
         widgets.add(Widgets.createSlot(new Point(bgBounds.x + 74, bgBounds.y + 18))
                 .entries(display.getOutputEntries().get(0)).markOutput().disableBackground());

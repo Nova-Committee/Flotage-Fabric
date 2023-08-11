@@ -1,6 +1,6 @@
 package committee.nova.flotage.impl.block;
 
-import committee.nova.flotage.init.BlockMember;
+import committee.nova.flotage.util.BlockMember;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
@@ -54,7 +54,7 @@ public class RaftBlock extends Block implements Waterloggable {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
@@ -65,14 +65,14 @@ public class RaftBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
         return true;
     }
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState state2 = world.getBlockState(pos.up());
-        return (state2.contains(WATERLOGGED) ? !state2.get(WATERLOGGED) : !state2.getMaterial().isLiquid()) && state.getFluidState().isOf(Fluids.WATER);
+        return (!state2.contains(WATERLOGGED) || !state2.get(WATERLOGGED)) && state.getFluidState().isOf(Fluids.WATER);
     }
 
     @Override

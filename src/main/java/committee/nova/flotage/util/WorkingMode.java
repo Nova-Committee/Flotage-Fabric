@@ -1,4 +1,4 @@
-package committee.nova.flotage.init;
+package committee.nova.flotage.util;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +29,7 @@ public enum WorkingMode {
         } else if (world.getBlockState(pos.down()).isOf(Blocks.CAMPFIRE)) {
             return SMOKE;
         } else if (world.isRaining()) {
-            if (biome.getPrecipitation() == Biome.Precipitation.SNOW && !biome.doesNotSnow(pos))
+            if (biome.getPrecipitation(pos) == Biome.Precipitation.SNOW && !biome.doesNotSnow(pos))
                 return SNOW;
             else
                 return RAIN;
@@ -53,7 +53,7 @@ public enum WorkingMode {
             return false;
         }
         Biome biome = world.getBiome(pos).value();
-        return biome.getPrecipitation() == Biome.Precipitation.SNOW && !biome.doesNotSnow(pos);
+        return biome.getPrecipitation(pos) == Biome.Precipitation.SNOW && !biome.doesNotSnow(pos);
     }
 
     @Override

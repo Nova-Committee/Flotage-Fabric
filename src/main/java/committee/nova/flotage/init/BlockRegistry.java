@@ -2,9 +2,11 @@ package committee.nova.flotage.init;
 
 import committee.nova.flotage.Flotage;
 import committee.nova.flotage.impl.block.*;
+import committee.nova.flotage.util.BlockMember;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +43,7 @@ public class BlockRegistry {
     }
 
     private static void block(String id, Block block) {
-        Registry.register(Registry.BLOCK, Flotage.id(id), block);
+        Registry.register(Registries.BLOCK, Flotage.id(id), block);
     }
 
     private static void block(String id, AbstractBlock.Settings settings) {
@@ -49,7 +51,7 @@ public class BlockRegistry {
     }
 
     public static Block get(String id) {
-        return Registry.BLOCK.get(Flotage.id(id));
+        return Registries.BLOCK.get(Flotage.id(id));
     }
 
     public static Block[] getRacks() {

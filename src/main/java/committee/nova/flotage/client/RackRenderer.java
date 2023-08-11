@@ -6,11 +6,11 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
+import org.joml.Quaternionf;
 
 public class RackRenderer implements BlockEntityRenderer<RackBlockEntity> {
 
@@ -34,7 +34,7 @@ public class RackRenderer implements BlockEntityRenderer<RackBlockEntity> {
                 renderItemLayingDown(matrices, direction);
             }
 
-            MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumers, iPos);
+            MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, tile.getWorld(), iPos);
             matrices.pop();
         }
     }
@@ -43,9 +43,9 @@ public class RackRenderer implements BlockEntityRenderer<RackBlockEntity> {
         matrixStackIn.translate(0.5d, 1d, 0.5d);
 
         float f = -direction.asRotation();
-        matrixStackIn.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(f));
+        matrixStackIn.multiply(new Quaternionf().rotationY((float) Math.toRadians(f)));
 
-        matrixStackIn.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.f));
+        matrixStackIn.multiply(new Quaternionf().rotationY((float) (Math.PI * 0.5f)));
 
         matrixStackIn.scale(0.6f, 0.6f, 0.6f);
     }
@@ -54,7 +54,7 @@ public class RackRenderer implements BlockEntityRenderer<RackBlockEntity> {
         matrixStackIn.translate(0.5d, 1.15d, .5d);
 
         float f = -direction.asRotation();
-        matrixStackIn.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(f));
+        matrixStackIn.multiply(new Quaternionf().rotationY((float) Math.toRadians(f)));
 
         matrixStackIn.scale(0.8f, 0.8f, 0.8f);
     }

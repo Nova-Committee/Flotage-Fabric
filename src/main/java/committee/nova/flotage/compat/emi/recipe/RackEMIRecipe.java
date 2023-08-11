@@ -21,7 +21,7 @@ public class RackEMIRecipe implements EmiRecipe {
     public RackEMIRecipe(RackRecipe recipe) {
         this.id = recipe.getId();
         this.input = List.of(EmiIngredient.of(recipe.getIngredients().get(0)));
-        this.output = List.of(EmiStack.of(recipe.getOutput()));
+        this.output = List.of(EmiStack.of(recipe.getResult()));
     }
 
     @Override

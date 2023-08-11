@@ -1,9 +1,9 @@
-package committee.nova.flotage.init;
+package committee.nova.flotage.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public enum BlockMember {
     OAK(Blocks.OAK_LOG, "橡木"),
@@ -35,7 +35,7 @@ public enum BlockMember {
     }
 
     public Identifier log() {
-        return Registry.BLOCK.getId(repairBlock);
+        return Registries.BLOCK.getId(repairBlock);
     }
 
     public String raft() {

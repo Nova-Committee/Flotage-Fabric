@@ -1,14 +1,16 @@
 package committee.nova.flotage.impl.block;
 
-import committee.nova.flotage.init.BlockMember;
+import committee.nova.flotage.util.BlockMember;
 import committee.nova.flotage.init.BlockRegistry;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -33,7 +35,7 @@ public class SimpleFenceBlock extends Block implements Waterloggable {
     public final BlockMember member;
 
     public SimpleFenceBlock(BlockMember member) {
-        super(Settings.of(Material.WOOD).strength(1.5F,1F));
+        super(Settings.create().instrument(Instrument.BASS).sounds(BlockSoundGroup.WOOD).burnable().strength(1.5F,1F));
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.NORTH));
         this.member = member;
     }
@@ -88,14 +90,14 @@ public class SimpleFenceBlock extends Block implements Waterloggable {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getPlayerLookDirection().getOpposite());
     }
 
     @Nullable
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }

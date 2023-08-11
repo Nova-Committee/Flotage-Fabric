@@ -1,6 +1,5 @@
 plugins {
     id 'fabric-loom' version '1.1-SNAPSHOT'
-    id 'maven-publish'
 }
 
 version = project.minecraft_version + '-' + project.mod_version
@@ -13,7 +12,6 @@ loom {
             name "Minecraft DataGen"
             vmArg "-Dfabric-api.datagen"
             vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-            vmArg "-Dfabric-api.datagen.modid=${project.archives_base_name}"
 
             runDir "build/datagen"
         }
@@ -61,16 +59,12 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
-
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
 
-    modCompileOnly "dev.emi:emi:${project.emi_version}:api"
+    modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
 
     modImplementation "curse.maven:jade-324717:${project.jade_version}"
-
-    modImplementation "dev.latvian.mods:kubejs-fabric:${project.kjs_version}"
 
     modApi "com.terraformersmc:modmenu:${project.mod_menu_version}"
 }
@@ -84,37 +78,8 @@ processResources {
     }
 }
 
-def targetJavaVersion = 17
-tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release = targetJavaVersion
-    }
-}
-
-java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
-    archivesBaseName = project.archives_base_name
-    withSourcesJar()
-}
-
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-
+        rename { "${it}_flotage" }
     }
 }

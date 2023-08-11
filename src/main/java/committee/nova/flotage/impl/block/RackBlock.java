@@ -1,16 +1,18 @@
 package committee.nova.flotage.impl.block;
 
 import committee.nova.flotage.impl.tile.RackBlockEntity;
-import committee.nova.flotage.init.BlockMember;
+import committee.nova.flotage.util.BlockMember;
 import committee.nova.flotage.init.TileRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -27,7 +29,7 @@ public class RackBlock extends BlockWithEntity implements BlockEntityProvider {
     public final BlockMember member;
 
     public RackBlock(BlockMember member) {
-        super(Settings.of(Material.WOOD).strength(1.5F,1F));
+        super(Settings.create().instrument(Instrument.BASS).sounds(BlockSoundGroup.WOOD).burnable().strength(1.5F,1F));
         this.member = member;
     }
 
@@ -76,7 +78,7 @@ public class RackBlock extends BlockWithEntity implements BlockEntityProvider {
     }
 
     @Override
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
         return true;
     }
 

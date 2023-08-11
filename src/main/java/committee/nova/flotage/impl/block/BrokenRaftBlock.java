@@ -1,13 +1,14 @@
 package committee.nova.flotage.impl.block;
 
-import committee.nova.flotage.init.BlockMember;
 import committee.nova.flotage.init.BlockRegistry;
+import committee.nova.flotage.util.BlockMember;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 
 public class BrokenRaftBlock extends RaftBlock {
     public BrokenRaftBlock( BlockMember member) {
-        super(Settings.of(Material.WOOD).noCollision().strength(1.5F,1F), member);
+        super(Settings.create().instrument(Instrument.BASS).sounds(BlockSoundGroup.WOOD).burnable().noCollision().strength(1.5F,1F), member);
     }
 
     @Override

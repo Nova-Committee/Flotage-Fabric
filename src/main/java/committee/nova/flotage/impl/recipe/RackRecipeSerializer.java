@@ -3,15 +3,15 @@ package committee.nova.flotage.impl.recipe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import committee.nova.flotage.init.WorkingMode;
+import committee.nova.flotage.util.WorkingMode;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
-import net.minecraft.util.registry.Registry;
 
 import static net.minecraft.recipe.ShapedRecipe.outputFromJson;
 
@@ -30,7 +30,7 @@ public class RackRecipeSerializer implements RecipeSerializer<RackRecipe> {
             result = outputFromJson((JsonObject) element);
         else {
             String string = element.getAsString();
-            Item item = Registry.ITEM.getOrEmpty(new Identifier(string)).orElseThrow(() -> new JsonSyntaxException("Unknown item '" + string + "'"));
+            Item item = Registries.ITEM.getOrEmpty(new Identifier(string)).orElseThrow(() -> new JsonSyntaxException("Unknown item '" + string + "'"));
             result = new ItemStack(item);
         }
         int processtime = json.get("processtime").getAsInt();

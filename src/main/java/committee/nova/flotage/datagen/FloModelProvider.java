@@ -1,23 +1,22 @@
 package committee.nova.flotage.datagen;
 
 import committee.nova.flotage.Flotage;
-import committee.nova.flotage.init.BlockMember;
 import committee.nova.flotage.init.BlockRegistry;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import committee.nova.flotage.util.BlockMember;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.Optional;
 
-;
 
-public class RModelProvider extends FabricModelProvider {
+public class FloModelProvider extends FabricModelProvider {
     protected static BlockStateModelGenerator blockGenerator;
     protected static ItemModelGenerator itemGenerator;
-    public RModelProvider(FabricDataGenerator dataGenerator) {
+    public FloModelProvider(FabricDataOutput dataGenerator) {
         super(dataGenerator);
     }
 
@@ -70,6 +69,6 @@ public class RModelProvider extends FabricModelProvider {
     }
 
     private static Model itemModel(Block block) {
-        return new Model(Optional.of(Flotage.id("block/" + Registry.BLOCK.getId(block).getPath())), Optional.empty());
+        return new Model(Optional.of(Flotage.id("block/" + Registries.BLOCK.getId(block).getPath())), Optional.empty());
     }
 }

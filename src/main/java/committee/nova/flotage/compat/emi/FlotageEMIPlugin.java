@@ -3,7 +3,7 @@ package committee.nova.flotage.compat.emi;
 import committee.nova.flotage.compat.emi.recipe.RackEMIRecipe;
 import committee.nova.flotage.impl.recipe.RackRecipe;
 import committee.nova.flotage.impl.recipe.RackRecipeType;
-import committee.nova.flotage.init.BlockMember;
+import committee.nova.flotage.util.BlockMember;
 import committee.nova.flotage.init.BlockRegistry;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;

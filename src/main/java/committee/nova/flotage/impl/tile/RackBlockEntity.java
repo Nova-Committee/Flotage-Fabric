@@ -3,7 +3,7 @@ package committee.nova.flotage.impl.tile;
 import committee.nova.flotage.impl.recipe.RackRecipe;
 import committee.nova.flotage.impl.recipe.RackRecipeType;
 import committee.nova.flotage.init.TileRegistry;
-import committee.nova.flotage.init.WorkingMode;
+import committee.nova.flotage.util.WorkingMode;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
@@ -15,8 +15,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.*;
 import net.minecraft.util.Identifier;
@@ -24,7 +22,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -47,9 +44,8 @@ public class RackBlockEntity extends BlockEntity implements BlockEntityInv, Reci
         super(TileRegistry.get("rack"), pos, state);
     }
 
-    @NotNull
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+    public BlockEntityUpdateS2CPacket toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
@@ -81,17 +77,14 @@ public class RackBlockEntity extends BlockEntity implements BlockEntityInv, Reci
         nbt.putString("ItemDirection", this.itemDirection.name());
 
         NbtCompound nbtCompound = new NbtCompound();
-        this.recipesUsed.forEach((identifier, count) -> nbtCompound.putInt(identifier.toString(), (int)count));
+        this.recipesUsed.forEach((identifier, count) -> nbtCompound.putInt(identifier.toString(), count));
         nbt.put("RecipesUsed", nbtCompound);
     }
 
-    public boolean setItem(ItemStack itemStack) {
+    public void setItem(ItemStack itemStack) {
         if (isEmpty() && !itemStack.isEmpty()) {
             items.set(0, itemStack);
-            return true;
         }
-
-        return false;
     }
 
     public void clean() {
@@ -128,7 +121,7 @@ public class RackBlockEntity extends BlockEntity implements BlockEntityInv, Reci
                     tile.processTime++;
                     if (tile.processTime == tile.processTimeTotal) {
                         tile.processTime = 0;
-                        tile.setStack(0, recipe.getOutput());
+                        tile.setStack(0, recipe.getOutput(world.getRegistryManager()));
                         tile.setLastRecipe(recipe);
                         flag = true;
                     }
@@ -179,7 +172,6 @@ public class RackBlockEntity extends BlockEntity implements BlockEntityInv, Reci
         return 1;
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     public Storage<ItemVariant> getExposedStorage(Direction side) {
         return new CombinedStorage<>(List.of(
                 getInternalStoreStorage(side),
@@ -187,7 +179,6 @@ public class RackBlockEntity extends BlockEntity implements BlockEntityInv, Reci
         ));
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     private Storage<ItemVariant> getInternalStoreStorage(Direction side) {
         Objects.requireNonNull(side);
         if (internalStoreStorage[0] == null) {
