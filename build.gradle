@@ -18,6 +18,10 @@ loom {
     }
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/flotage.accesswidener")
+}
+
 sourceSets {
     main {
         resources {

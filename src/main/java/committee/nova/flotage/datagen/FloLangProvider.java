@@ -1,5 +1,6 @@
 package committee.nova.flotage.datagen;
 
+import committee.nova.flotage.init.BlockRegistry;
 import committee.nova.flotage.util.BlockMember;
 import committee.nova.flotage.util.WorkingMode;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -17,7 +18,7 @@ public class FloLangProvider {
             builder.add("itemGroup.flotage.tab", "Flotage");
             builder.add("modmenu.descriptionTranslation.flotage", "Survive on the sea!");
             builder.add("tip.flotage.rack.processtime", "%s second(s) processing");
-            builder.add("tip.flotage.rack.mode", "Condition: ");
+            builder.add("tip.flotage.rack.mode", "Current Condition: ");
             builder.add("block.flotage.rack", "Rack Processing");
             builder.add("config.jade.plugin_flotage.rack_blockentity", "Rack Working Mode");
             builder.add("emi.category.flotage.rack", "Rack Processing");
@@ -27,11 +28,11 @@ public class FloLangProvider {
             }
 
             for (BlockMember member : BlockMember.values()) {
-                builder.add(member.raft(), beautifyName(member.raft()));
-                builder.add(member.brokenRaft(), beautifyName(member.brokenRaft()));
-                builder.add(member.fence(), beautifyName(member.fence()));
-                builder.add(member.crossedFence(), beautifyName(member.crossedFence()));
-                builder.add(member.rack(), beautifyName(member.rack()));
+                builder.add(BlockRegistry.get(member.raft()), beautifyName(member.raft()));
+                builder.add(BlockRegistry.get(member.brokenRaft()), beautifyName(member.brokenRaft()));
+                builder.add(BlockRegistry.get(member.fence()), beautifyName(member.fence()));
+                builder.add(BlockRegistry.get(member.crossedFence()), beautifyName(member.crossedFence()));
+                builder.add(BlockRegistry.get(member.rack()), beautifyName(member.rack()));
             }
         }
     }
@@ -46,7 +47,7 @@ public class FloLangProvider {
             builder.add("itemGroup.flotage.tab", "漂浮物");
             builder.add("modmenu.descriptionTranslation.flotage", "生存于大海之上！");
             builder.add("tip.flotage.rack.processtime", "需要处理 %s 秒。");
-            builder.add("tip.flotage.rack.mode", "处理条件：");
+            builder.add("tip.flotage.rack.mode", "当前处理条件：");
             builder.add("block.flotage.rack", "置物架");
             builder.add("config.jade.plugin_flotage.rack_blockentity", "置物架模式");
             builder.add("emi.category.flotage.rack", "置物架");
@@ -61,11 +62,11 @@ public class FloLangProvider {
             builder.add("tip.flotage.rack.mode.smoke", "烟熏");
 
             for (BlockMember member : BlockMember.values()) {
-                builder.add(member.raft(), member.chinese + "筏");
-                builder.add(member.brokenRaft(), "损坏的" + member.chinese + "筏");
-                builder.add(member.fence(), "简易" + member.chinese + "栅栏");
-                builder.add(member.crossedFence(), member.chinese + "十字栅栏");
-                builder.add(member.rack(), member.chinese + "置物架");
+                builder.add(BlockRegistry.get(member.raft()), member.chinese + "筏");
+                builder.add(BlockRegistry.get(member.brokenRaft()), "损坏的" + member.chinese + "筏");
+                builder.add(BlockRegistry.get(member.fence()), "简易" + member.chinese + "栅栏");
+                builder.add(BlockRegistry.get(member.crossedFence()), member.chinese + "十字栅栏");
+                builder.add(BlockRegistry.get(member.rack()), member.chinese + "置物架");
             }
         }
     }

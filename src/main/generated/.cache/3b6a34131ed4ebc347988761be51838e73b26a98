@@ -1,8 +1,0 @@
-// 1.20.1	2023-08-11T14:25:08.196665	Flotage/Tags for minecraft:block
-8d2df2f2c62c42e93ef21c711a9adf68fd572201 data\flotage\tags\blocks\fence.json
-1c4f68c1cd867776f02295173d3ba5fd1a11633b data\flotage\tags\blocks\rack.json
-250940ea7f7d73277f704f8f3dc11c900b7a3808 data\flotage\tags\blocks\broken_raft.json
-81279e03e853abc4b85aeae1f8909355a9e6cde6 data\minecraft\tags\blocks\mineable\axe.json
-8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\mineable\pickaxe.json
-c81f148eb30d33dd07511158b83b5fbc59845ee6 data\flotage\tags\blocks\crossed_fence.json
-91df2b33450621f5ffe550bdb9e2afa211338524 data\flotage\tags\blocks\raft.json

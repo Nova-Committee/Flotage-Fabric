@@ -42,10 +42,8 @@ public class RackRenderer implements BlockEntityRenderer<RackBlockEntity> {
     private void renderItemLayingDown(MatrixStack matrixStackIn, Direction direction) {
         matrixStackIn.translate(0.5d, 1d, 0.5d);
 
-        float f = -direction.asRotation();
-        matrixStackIn.multiply(new Quaternionf().rotationY((float) Math.toRadians(f)));
+        matrixStackIn.multiply(direction.getRotationQuaternion());
 
-        matrixStackIn.multiply(new Quaternionf().rotationY((float) (Math.PI * 0.5f)));
 
         matrixStackIn.scale(0.6f, 0.6f, 0.6f);
     }
@@ -53,8 +51,8 @@ public class RackRenderer implements BlockEntityRenderer<RackBlockEntity> {
     private void renderBlock(MatrixStack matrixStackIn, Direction direction) {
         matrixStackIn.translate(0.5d, 1.15d, .5d);
 
-        float f = -direction.asRotation();
-        matrixStackIn.multiply(new Quaternionf().rotationY((float) Math.toRadians(f)));
+        matrixStackIn.multiply(direction.getRotationQuaternion());
+        matrixStackIn.multiply(new Quaternionf().rotationX((float) -(Math.PI * 0.5f)));
 
         matrixStackIn.scale(0.8f, 0.8f, 0.8f);
     }
